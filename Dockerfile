@@ -1,5 +1,5 @@
 # Use a Node.js image
-FROM node:14
+FROM node:18
 
 # Set environment variables
 ENV LANG=C.UTF-8 \
@@ -14,8 +14,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Configure PostgreSQL authentication
-RUN echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/11/main/pg_hba.conf && \
-    echo "listen_addresses='*'" >> /etc/postgresql/11/main/postgresql.conf
+RUN echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/15/main/pg_hba.conf && \
+    echo "listen_addresses='*'" >> /etc/postgresql/15/main/postgresql.conf
 
 # Start PostgreSQL, create the database, user, and decode and execute the Base64 SQL commands
 RUN service postgresql start && \

@@ -39,6 +39,7 @@ describe('Database Test', function () {
         INSERT INTO users (
           email,
           username,
+          password_hash,
           first_name,
           last_name,
           date_of_birth,
@@ -46,6 +47,7 @@ describe('Database Test', function () {
         ) VALUES (
           'test.user@example.com',
           'testuser123',
+          '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/HS.i77i',
           'Test',
           'User',
           '1990-01-15',
@@ -134,7 +136,7 @@ describe('Database Test', function () {
           'User',
           $1,
           '+1-555-000-0003'
-        )`, [tooYoungDate.toISOString()]);
+        )`, [tooYoungDate.toISOString().split('T')[0]]);
       throw new Error('Should not reach this point');
     } catch (error) {
       expect(error.code).to.equal('23514'); // PostgreSQL check violation error code
